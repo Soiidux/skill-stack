@@ -13,7 +13,6 @@ const navItems: navItem[] = [
   { label: "Home", href: "/" },
   { label: "Companions", href: "/companions" },
   { label: "My Journey", href: "/my-journey" },
-  { label: "Sign In", href: "/sign-in" },
 ];
 
 export default function NavItems() {
