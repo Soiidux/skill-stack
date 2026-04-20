@@ -15,6 +15,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { createCompanion } from "@/lib/actions/companion.actions";
+import { redirect } from "next/navigation";
 const companionFormSchema = z.object({
   name: z.string().min(1, { message: "Companion name is required" }),
   subject: z.string().min(1, { message: "Subject is required" }),
@@ -42,8 +44,14 @@ export default function CompanionForm() {
   });
 
   const onSubmit: SubmitHandler<CompanionFormData> = async (data) => {
-    console.log("Form submitted:", data);
-    // Handle form submission here
+    const companion = await createCompanion(data);
+    
+    if (companion) {
+      redirect(`/companions/${companion.id}`)
+    } else {
+      console.log("Failed to create companion");
+      redirect("/");
+    }
   };
 
   return (
