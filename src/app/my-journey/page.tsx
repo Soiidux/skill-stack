@@ -71,6 +71,7 @@ const Profile = async () => {
             <CompanionsList
               title="Recent Sessions"
               companions={sessionHistory}
+              classNames={sessionHistory.length === 0 ? 'hidden' : ''}
             />
           </AccordionContent>
         </AccordionItem>
@@ -79,7 +80,8 @@ const Profile = async () => {
             My Companions {`(${companions.length})`}
           </AccordionTrigger>
           <AccordionContent>
-            <CompanionsList title="My Companions" companions={companions} />
+            <CompanionsList title="My Companions" companions={companions}
+            classNames={companions.length === 0 ? 'hidden' : ''}/>
           </AccordionContent>
         </AccordionItem>
       </Accordion>

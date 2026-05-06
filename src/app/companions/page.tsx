@@ -19,9 +19,13 @@ export default async function CompanionsLibrary({searchParams}:SearchParams) {
         </div>
       </section>
       <section className="flex flex-wrap gap-4 w-full max-md:justify-center">
-        {companions.map((companion) => (
-          <CompanionCard key={companion.id} {...companion} color={getSubjectColor(companion.subject)} />
-        ))}
+        {(companions.length>0)? (
+          <div className="flex flex-wrap gap-4 w-full max-md:justify-center">
+            {companions.map((companion) => (
+              <CompanionCard key={companion.id} {...companion} color={getSubjectColor(companion.subject)} />
+            ))}
+          </div>
+        ): <div>No companions to show.</div>}
       </section>
     </main>
   )

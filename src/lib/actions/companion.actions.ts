@@ -20,8 +20,8 @@ export const createCompanion = async (formData: CreateCompanion) => {
 
 export const getAllCompanions = async ({ limit = 10, page = 1, subject, topic }: GetAllCompanions) => {
     const supabase = createClient();
-
-    let query = supabase.from('companions').select();
+    const { userId } = await auth();
+    let query = supabase.from('companions').select().eq('author', userId);
 
     if(subject && topic) {
         query = query.ilike('subject', `%${subject}%`)
@@ -113,11 +113,11 @@ export const newCompanionPermissions = async () => {
 
     let limit = 0;
 
-    if(has({ plan: 'pro' })) {
+    if(has({ plan: 'core_learner' })) {
         return true;
-    } else if(has({ feature: "3_companion_limit" })) {
+    } else if(has({ feature: "3_active_companions" })) {
         limit = 3;
-    } else if(has({ feature: "10_companion_limit" })) {
+    } else if(has({ feature: "10_active_companions" })) {
         limit = 10;
     }
 

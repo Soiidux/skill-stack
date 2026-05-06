@@ -10,7 +10,7 @@ const Page = async () => {
   const recentSessions = await getRecentSessions(10);
   return (
     <main>
-      <h1 className='text-2xl underline'>Popular Companions</h1>
+      <h1 className={`text-2xl underline ${companions.length === 0 ? 'hidden' : ''}`}>Popular Companions</h1>
       <section className='flex gap-4 justify-between items-start w-full max-lg:flex-col-reverse max-lg:items-center'>
         {companions.map((companion) => (
           <CompanionCard
